@@ -110,7 +110,7 @@ class MongoDB:
 
                 # Parse JSON back to Python objects (if needed)
                 items = json_util.loads(items_json)
-                print(items)
+                # print(items)
                 return items
 
             except Exception as e:
