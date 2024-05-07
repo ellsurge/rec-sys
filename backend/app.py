@@ -13,7 +13,7 @@ app  = Flask(__name__)
 db=  MongoDB()
 glove_path = 'model/glove.6B.50d.txt'
 glove_zip_path = 'model/glove.6B.50d.txt.zip'
-glove_url = 'https://rec-system-images.s3.amazonaws.com/next-s3-uploads/model/glove.6B.100d.txt'
+glove_url = 'https://rec-system-images.s3.amazonaws.com/next-s3-uploads/model/glove.6B.50d.txt'
 
 
 # UTILIS ---------
