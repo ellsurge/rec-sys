@@ -26,8 +26,9 @@ const ItemList = () => {
     setStatus("loading");
     try {
       const response = await getAllItems();
-      if (response.products && response.products.length > 0) {
-        setItems(response.products);
+      console.log(response)
+      if (response.result && response.result.length > 0) {
+        setItems(response.result);
       }
     } catch (error) {
       console.error("Error fetching items:", error);

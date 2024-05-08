@@ -16,9 +16,9 @@ export default function ViewItem({ params }) {
 
   useEffect(() => {
     getItem(id).then((i) => {
-      if (i.length > 0) {
-        setItem(i[0]);
-        setRecommendations(i.slice(1));
+      if (i.result.length > 0) {
+        setItem(i.result[0]);
+        setRecommendations(i.result.slice(1));
         setIsLoading(true);
       }
     });
@@ -49,7 +49,7 @@ export default function ViewItem({ params }) {
               <Item
                 key={item.item_id} // Assuming 'key' is a unique identifier for each item
                 item={{
-                  id: item.item_id,
+                  id: item.id,
                   title: item.name,
                   image: item.image,
                   // category: item.category,

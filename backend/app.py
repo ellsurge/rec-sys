@@ -235,7 +235,7 @@ def get_recommendations():
             'image':item['image'],
             'similarity':similarity
         }
-        for item, similarity in similarities[:5]
+        for item, similarity in similarities[:6]
     ]
     response = jsonify({'result': recommendations})
     response.headers.add('Access-Control-Allow-Origin', '*')
