@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from models import Item, MongoDB
 from uuid import uuid4
 import numpy as np
@@ -11,6 +12,7 @@ import urllib.request
 import concurrent.futures
 
 app  = Flask(__name__)
+CORS(app)
 db=  MongoDB()
 glove_path = 'model/glove.6B.50d.txt'
 glove_zip_path = 'model/glove.6B.50d.txt.zip'
@@ -163,7 +165,9 @@ def hello_world():
 def get_all_items():
     try:
         res = db.get_all_items()
-        return jsonify({'result':res}), 200
+        response = jsonify({'result':res})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 200
     except Exception as e:
         return jsonify({'error':str(e)}), 500
 
@@ -172,7 +176,9 @@ def get_item_by_id():
     id = request.args.get('id')
     try:
         res = db.get_item_by_id(id)
-        return jsonify({'result':res}), 200
+        response = jsonify({'result':res})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 200
     except Exception as e:
         return jsonify({'error':str(e)}), 500
     
@@ -199,7 +205,9 @@ def add_item():
     }
     try:
         db.add_item(payload)
-        return jsonify({"message": "Item added successfuly"}), 201
+        response = jsonify({"message": "Item added successfuly"})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 201
     except Exception as e:
         return jsonify({'error':str(e)}), 500
     # return res
@@ -229,7 +237,9 @@ def get_recommendations():
         }
         for item, similarity in similarities[:5]
     ]
-    return jsonify({'recommendations': recommendations}), 200
+    response = jsonify({'result': recommendations})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response, 200
 
 @app.route('/clone_data',  methods=['GET'])
 def insert_data():

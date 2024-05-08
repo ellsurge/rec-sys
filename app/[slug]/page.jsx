@@ -16,18 +16,12 @@ export default function ViewItem({ params }) {
 
   useEffect(() => {
     getItem(id).then((i) => {
-      setItem(i);
-      getAllItems(5).then((response) => {
-              if (response.products && response.products.length > 0) {
-                setRecommendations(response.products);
-              }
-      setIsLoading(true);
-
+      if (i.length > 0) {
+        setItem(i[0]);
+        setRecommendations(i.slice(1));
+        setIsLoading(true);
       }
-
-      )
     });
-
   }, []);
   return (
     <div className="gap-2">
@@ -37,13 +31,13 @@ export default function ViewItem({ params }) {
       {isLoading && (
         <div className="flex flex-wrap  justify-center mb-8  border border-default-200 dark:border-default-100 px-2 py-4 rounded-lg">
           <Card className="w-[300px] " shadow="none" radius="none">
-            <Image src={item?.thumbnail} height={"auto"} alt="img" />
+            <Image src={item?.image} height={"auto"} alt="img" />
           </Card>
 
           <Card className="w-[500px] space-y-2 p-5" shadow="none" radius="none">
-            <p class="text-5xl  uppercase font-bold ">{item?.title}</p>
+            <p class="text-5xl  uppercase font-bold ">{item?.name}</p>
             <div className="inline-bock"></div>
-            <p class="block text-xl text-default-500 ">{item?.description}</p>
+            <p class="block text-xl text-default-500 ">{item?.category}</p>
           </Card>
         </div>
       )}
@@ -53,13 +47,13 @@ export default function ViewItem({ params }) {
           <div className="flex flex-wrap gap-10 justify-center">
             {recommendations.map((item) => (
               <Item
-                key={item.id} // Assuming 'key' is a unique identifier for each item
+                key={item.item_id} // Assuming 'key' is a unique identifier for each item
                 item={{
-                  id: item.id,
-                  title: item.title,
-                  image: item.thumbnail,
-                  category: item.category,
-                  description: item.description,
+                  id: item.item_id,
+                  title: item.name,
+                  image: item.image,
+                  // category: item.category,
+                  description: item.category,
                 }}
               />
             ))}

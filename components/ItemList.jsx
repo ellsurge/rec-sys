@@ -69,13 +69,13 @@ const ItemList = () => {
           <div className="flex flex-wrap gap-10 justify-center">
             {data.map((item) => (
               <Item
-                key={item.id} // Assuming 'key' is a unique identifier for each item
+                key={item.item_id} // Assuming 'key' is a unique identifier for each item
                 item={{
-                  id: item.id,
-                  title: item.title,
-                  image: item.thumbnail,
-                  category: item.category,
-                  description: item.description,
+                  id: item.item_id,
+                  title: item.name,
+                  image: item.image,
+                  // category: item.category,
+                  description: item.category,
                 }}
               />
             ))}

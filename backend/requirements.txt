@@ -1,5 +1,6 @@
 gunicorn
 Flask
+flask-cors
 pymongo
 numpy
 scikit-learn
