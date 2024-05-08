@@ -4,12 +4,7 @@ node_modules/
 # Next.js build output
 .next/
 
-# Environment variables (if using .env files)
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env
+
 
 # Editor/IDE specific files
 .vscode/
