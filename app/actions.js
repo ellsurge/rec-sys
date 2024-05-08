@@ -1,7 +1,7 @@
 const API_URI = "https://rec-sys.onrender.com";
 
-export const getAllItems = async (limit=0) => {
-  const res = await fetch(`${API_URI}/get_all`, { cache: "force-cache" });
+export const getAllItems = async (limit = 0) => {
+  const res = await fetch(`${API_URI}/get_all`);
   if (!res.ok) {
     throw new Error("failed to fetch data");
   }
@@ -9,9 +9,7 @@ export const getAllItems = async (limit=0) => {
 };
 
 export const getItem = async (id) => {
-  const res = await fetch(`${API_URI}/recommendations?id=${id}`, {
-    cache: "force-cache",
-  });
+  const res = await fetch(`${API_URI}/recommendations?id=${id}`);
   if (!res.ok) {
     throw new Error("failed to fetch data");
   }
@@ -31,4 +29,4 @@ export const addItem = async (payload) => {
     throw new Error("failed to add product");
   }
   return res.json();
-}
+};
