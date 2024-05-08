@@ -5,7 +5,7 @@ export const getAllItems = async (limit=0) => {
   if (!res.ok) {
     throw new Error("failed to fetch data");
   }
-  return res.json().result;
+  return res.json();
 };
 
 export const getItem = async (id) => {
@@ -15,7 +15,7 @@ export const getItem = async (id) => {
   if (!res.ok) {
     throw new Error("failed to fetch data");
   }
-  return res.json().result;
+  return res.json();
 };
 
 export const addItem = async (payload) => {
