@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { getAllItems } from "@/app/actions";
 import Item from "@/components/Item"; // Assuming correct import path for Item component
@@ -12,7 +13,6 @@ const ItemList = () => {
   // const[data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const itemPerPage = 8;
   const pages = Math.ceil(items.length / itemPerPage);
   const data = useMemo(() => {
@@ -20,13 +20,13 @@ const ItemList = () => {
     const end = start + itemPerPage;
 
     return items.slice(start, end);
-  }, [currentPage, items])
+  }, [currentPage, items]);
 
   const reloadAction = async () => {
     setStatus("loading");
     try {
       const response = await getAllItems();
-      console.log(response)
+      console.log(response);
       if (response.result && response.result.length > 0) {
         setItems(response.result);
       }
@@ -36,7 +36,9 @@ const ItemList = () => {
       setStatus("idle");
     }
   };
-  useEffect(() => { reloadAction() }, []);
+  useEffect(() => {
+    reloadAction();
+  }, []);
   const IdleComponent = () => (
     <div className="inline-block text-center justify-center">
       <Card shadow="none" className="w-100">

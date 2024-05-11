@@ -171,6 +171,17 @@ def get_all_items():
     except Exception as e:
         return jsonify({'error':str(e)}), 500
 
+@app.route('/validate', methods=['GET'])
+def validate():
+    user = request.args.get('user')
+    password = request.args.get('password')
+    try:
+        res = db.validate_user(user, password)
+        response = jsonify({'result':res})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 200
+    except Exception as e:
+        return jsonify({'error':str(e)}), 500
 @app.route('/get_item', methods=['GET'])
 def get_item_by_id():
     id = request.args.get('id')
@@ -182,6 +193,61 @@ def get_item_by_id():
     except Exception as e:
         return jsonify({'error':str(e)}), 500
     
+@app.route('/get_cart', methods=['GET'])
+def get_cart():
+    id = request.args.get('id')
+    try:
+        res = db.get_cart(id)
+        response = jsonify({'result':res})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 200
+    except Exception as e:
+        return jsonify({'error':str(e)}), 500 
+    
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+
+    data = request.get_json()
+
+    user_id=  data.get('user')
+    item_id= data.get('item')
+    if not user_id or not item_id:
+        return jsonify({'error': 'item and category are requited'}), 400
+
+    payload = {
+        "user" : user_id,
+        'item': item_id,
+    }
+    try:
+        db.add_to_cart(payload)
+        response = jsonify({"message": "Item added successfuly"})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 201
+    except Exception as e:
+        return jsonify({'error':str(e)}), 500
+    # return res
+@app.route('/add_user', methods=['POST'])
+def add_user():
+
+    data = request.get_json()
+
+    user=  data.get('user')
+    password= data.get('password')
+    if not user or not password:
+        return jsonify({'error': 'username and password are requited'}), 400
+
+    payload = {
+        "user" : user,
+        'password': password,
+    }
+    try:
+        db.add_user(payload)
+        response = jsonify({"message": "user added successfuly"})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 201
+    except Exception as e:
+        return jsonify({'error':str(e)}), 500
+    # return res
 @app.route('/add_item', methods=['POST'])
 def add_item():
 
@@ -210,8 +276,6 @@ def add_item():
         return response, 201
     except Exception as e:
         return jsonify({'error':str(e)}), 500
-    # return res
-
 @app.route('/recommendations', methods=['GET'])
 def get_recommendations():
     id = request.args.get('id')
@@ -271,6 +335,6 @@ def insert_data():
     else:
         return f'Failed to fetch data from API. Status code: {response.status_code}', 500
        
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
 
