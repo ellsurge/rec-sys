@@ -40,7 +40,7 @@ class MongoDB:
             'image': item['image'],
             'embedding': item['embedding']
         }
-        self.item_collection.insert_one(item_dict)
+        self.items_collection.insert_one(item_dict)
 
     def add_to_cart(self, item):
         try:
