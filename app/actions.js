@@ -7,7 +7,7 @@ const API_URI = "https://rec-sys.onrender.com";
 // const API_URI = "http://127.0.0.1:5000";
 
 export const getAllItems = async (limit = 0) => {
-  const res = await fetch(`${API_URI}/get_all`, { cache: "force-cache" });
+  const res = await fetch(`${API_URI}/get_all`);
   if (!res.ok) {
     throw new Error("failed to fetch data");
   }
