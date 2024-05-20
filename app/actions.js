@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import { useContext } from "react";
 import { redirect } from "next/navigation";
 
-// const API_URI = "https://rec-sys.onrender.com";
-const API_URI = "http://127.0.0.1:5000";
+const API_URI = "https://rec-sys.onrender.com";
+// const API_URI = "http://127.0.0.1:5000";
 
 export const getAllItems = async (limit = 0) => {
   const res = await fetch(`${API_URI}/get_all`, { cache: "force-cache" });
