@@ -8,12 +8,15 @@ import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import Item from "@/components/Item";
 import { useAppContext } from "../providers";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function List() {
   const app = useAppContext();
   const [id, setId] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const cart = app.cart;
+  const router = useRouter();
 
   useEffect(() => {
     const idd = app.user?._id || localStorage.getItem("user_id");
@@ -34,7 +37,12 @@ export default function List() {
         cart.map((item) => (
           <div key={item.item_id} className="mb-8">
             {!isLoading ? (
-              <div className="flex justify-center mb-4">
+              <div
+                className="flex justify-center mb-4"
+                onClick={() => {
+                  router.push(`/${item.item_id}`);
+                }}
+              >
                 <Card className="w-[300px]">
                   <Image src={item.image} height={"auto"} alt="img" />
                 </Card>
@@ -46,7 +54,7 @@ export default function List() {
             ) : (
               <Skeleton className="rounded-lg h-60" />
             )}
-            <Divider />
+            {/* <Divider /> */}
           </div>
         ))}
     </div>

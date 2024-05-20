@@ -42,6 +42,21 @@ export default function ViewItem({ params }) {
         </div>
       )}
       <Divider />
+      <div className="flex flex-wrap  justify-center mb-8  px-2 py-4">
+        <small className="mb-4 mt-0 font-normal leading-normal">
+          Our recommendation system works by turning each item, like a movie or
+          product, into a set of numbers that capture its meaning and
+          relationships to other items. GloVe (Global Vectors for Word
+          Representation) is a tool that learns these number sets by looking at
+          how often words appear together. In a recommendation system, this
+          means items that are similar in meaning are placed close together. So,
+          when you like or buy something, the system can suggest other items
+          that are closely related, making recommendations more accurate and
+          relevant to your interests.
+        </small>
+      </div>
+      <Divider />
+
       {recommendations.length > 0 && (
         <div className=" inline-block text-center justify-center gap-10 mt-5">
           <div className="flex flex-wrap gap-10 justify-center">
